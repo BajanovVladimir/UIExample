@@ -3,7 +3,7 @@ package models;
 import java.util.Objects;
 
 public class Person {
-    private String name;
+    private final String name;
     private String position;
     private String phoneNumber;
 

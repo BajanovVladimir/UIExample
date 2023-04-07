@@ -1,6 +1,5 @@
 package forms.organizations;
 
-
 import forms.utils.FormsUtils;
 import models.OrganizationsRepository;
 
@@ -11,11 +10,9 @@ import java.awt.event.ActionListener;
 
 
 public class OrganizationForm extends JFrame {
-    private OrganizationsRepository organizations;
-    private JComboBox<String> comboBoxOrganization = new JComboBox<>();
-    private JComboBox<String> comboBoxPersons = new JComboBox<>();
-    private JButton addOrgButton = new JButton("Добавить организацию");
-    private JButton addPersonButton = new JButton("Добавить контакт");
+    private final OrganizationsRepository organizations;
+    private final JComboBox<String> comboBoxOrganization = new JComboBox<>();
+    private final JComboBox<String> comboBoxPersons = new JComboBox<>();
 
 
     public OrganizationForm(OrganizationsRepository organizations) {
@@ -23,13 +20,14 @@ public class OrganizationForm extends JFrame {
         this.organizations = organizations;
 
         Box scrollBoxOrg = Box.createVerticalBox();
+        JButton addOrgButton = new JButton("Добавить организацию");
         scrollBoxOrg.add(addOrgButton);
         addOrgButton.addActionListener(new AddOrgButtonPressed(comboBoxOrganization,this));
         scrollBoxOrg.add(Box.createVerticalStrut(12));
         scrollBoxOrg.add(comboBoxOrganization);
         String[] organizationArray = organizations.getOrganizationNamesArray();
-        for (int i = 0; i < organizationArray.length; i++) {
-            comboBoxOrganization.addItem(organizationArray[i]);
+        for (String s : organizationArray) {
+            comboBoxOrganization.addItem(s);
         }
         String item = (String) comboBoxOrganization.getSelectedItem();
         String[] persons;
@@ -42,20 +40,17 @@ public class OrganizationForm extends JFrame {
         }
 
         Box scrollBoxPerson = Box.createVerticalBox();
+        JButton addPersonButton = new JButton("Добавить контакт");
         scrollBoxPerson.add(addPersonButton);
         addPersonButton.addActionListener(new AddPersonButtonPressed(this));
         scrollBoxPerson.add(Box.createVerticalStrut(12));
         scrollBoxPerson.add(comboBoxPersons);
         FormsUtils.updateComboBox(comboBoxPersons,persons);
-//        for (int i = 0; i < persons.length; i++) {
-//            comboBoxPersons.addItem(persons[i]);
-//        }
 
         Box mainScrollBox = Box.createHorizontalBox();
         mainScrollBox.add(scrollBoxOrg);
         mainScrollBox.add(Box.createHorizontalStrut(12));
         mainScrollBox.add(scrollBoxPerson);
-        //comboBoxOrganization.setPreferredSize(comboBoxPersons.getPreferredSize());
 
 
         Box buttonBox = Box.createHorizontalBox();
@@ -110,7 +105,7 @@ public class OrganizationForm extends JFrame {
         }
     }
     private class AddPersonButtonPressed implements ActionListener{
-        private OrganizationForm organizationFrame;
+        private final OrganizationForm organizationFrame;
         AddPersonButtonPressed(OrganizationForm frame){
             this.organizationFrame = frame;
         }
@@ -122,5 +117,4 @@ public class OrganizationForm extends JFrame {
             addPersonForm.setVisible(true);
         }
     }
-
 }

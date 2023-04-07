@@ -5,21 +5,18 @@ import models.OrganizationsRepository;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddOrganizationForm extends JFrame {
-    private OrganizationsRepository organization;
-    private JTextField textFieldOrgName = new JTextField(" ");
-    private JComboBox updateComboBox;
-    private JFrame fatherFrame;
+    private final OrganizationsRepository organization;
+    private final JTextField textFieldOrgName = new JTextField(" ");
+    private final JComboBox updateComboBox;
 
     public AddOrganizationForm(OrganizationsRepository organization, JComboBox comboBox, JFrame fatherFrame){
         super("Добавить организацию");
         this.organization = organization;
         this.updateComboBox = comboBox;
-        this.fatherFrame = fatherFrame;
 
         JLabel textFieldLabel = new JLabel("Введите название организации");
         JButton saveButton = new JButton("Сохранить");
@@ -48,8 +45,8 @@ public class AddOrganizationForm extends JFrame {
     }
 
     private class SaveButtonPressed implements ActionListener{
-        JFrame frame;
-        JFrame fatherFrame;
+        private final JFrame frame;
+        private final JFrame fatherFrame;
         SaveButtonPressed(JFrame frame, JFrame fatherFrame){
             this.frame = frame;
             this.fatherFrame = fatherFrame;
